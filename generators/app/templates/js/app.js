@@ -13,4 +13,16 @@ if ('serviceWorker' in navigator) {
 		// registration failed
 		console.log('Registration failed with ' + error);
 	});
+
+  // Communicate with the service worker using MessageChannel API.
+  function sendMessage(message) {
+    return new Promise(function(resolve, reject) {
+      const messageChannel = new MessageChannel();
+      messageChannel.port1.onmessage = function(event) {
+        resolve(`Direct message from SW: ${event.data}`);
+      };
+
+      navigator.serviceWorker.controller.postMessage(message, [messageChannel.port2])
+    });
+  }
 }

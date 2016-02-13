@@ -49,3 +49,19 @@ self.onfetch = function(event) {
     })
   );
 };
+
+
+// Communicate via MessageChannel.
+self.addEventListener('message', function(event) {
+  console.log(`Received message from main thread: ${event.data}`);
+  event.ports[0].postMessage(`Got message! Sending direct message back - "${event.data}"`);
+});
+
+// Broadcast via postMessage.
+function sendMessage(message) {
+  self.clients.matchAll().then(function(clients) {
+    clients.map(function(client) {
+      return client.postMessage(message);
+    })
+  });
+}
