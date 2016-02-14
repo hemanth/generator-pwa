@@ -36,6 +36,8 @@ This would generate a dir structure like:
 
 ##TODO
 
+* Add push notification and background sync.
+
 * Prompt for all `manifest.json` related fields.
 
 * AskFor static-cache-path (automatically pick the required files).
