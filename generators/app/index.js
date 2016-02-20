@@ -9,7 +9,7 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the peachy ' + chalk.red('generator-pwa') + ' generator!'
+      'Welcome to the peachy ' + chalk.red('Progresssive Web App') + ' generator!'
     ));
 
     done();
