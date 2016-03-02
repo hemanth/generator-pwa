@@ -27,12 +27,8 @@ if ('serviceWorker' in navigator) {
   }
 }
 
-//Push notification button
-var btn = document.getElementById("turn-on-notification");
-
 //Tokens
 var apiKey = "AIzaSyCjrU5SqotSg2ybDLK_7rMMt9Rv0dMusvY";
-var pushManager, endpoint;
 var gcmURL = "https://android.googleapis.com/gcm/send";
 
 // To check push notification support
@@ -71,7 +67,7 @@ function subscribePush() {
       console.log("Endpoint: ", subscription.endpoint);
 
       var temp = subscription.endpoint.split("/");
-      endpoint = temp[temp.length - 1];
+      var endpoint = temp[temp.length - 1];
       localStorage.setItem("endpoint", JSON.stringify(endpoint));
       logCurlCommand(endpoint);
       changeStatus(true);
@@ -117,7 +113,10 @@ function changeStatus(status) {
   btn.checked = status;
 }
 
-//Click event for subscribe btn
+//Push notification button
+var btn = document.getElementById("turn-on-notification");
+
+//Click event for subscribe push btn
 btn.addEventListener("click", function () {
   var isBtnChecked = (btn.dataset.checked === "true");
   if (isBtnChecked) {
@@ -132,6 +131,7 @@ btn.addEventListener("click", function () {
 function logCurlCommand(endPoint) {
   var curlCommand = 'curl --header "Authorization: key=' + apiKey +
 	'" --header Content-Type:"application/json" ' + gcmURL + ' -d "{\\"registration_ids\\":[\\"' + endPoint + '\\"]}"';
-  console.log("%ccurl command --> ", "background: #000; color: #fff; font-size: 16px;");
-  console.log(curlCommand);
+
+	console.log("%ccurl command --> ", "background: #000; color: #fff; font-size: 16px;");
+	console.log(curlCommand);
 }
