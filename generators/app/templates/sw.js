@@ -65,3 +65,27 @@ function sendMessage(message) {
     })
   });
 }
+
+//Listen to push event
+self.addEventListener("push", function(event) {
+  console.log("Push notification received ", event);
+
+  var title = "Push notification demo";
+  var body = "You have received a notification";
+  var tag = "pwa";
+  var icon = "/images/touch/icon-128x128.png";
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: body,
+      tag: tag,
+      icon: icon
+    })
+  );
+});
+
+//On click event for notification to close
+self.addEventListener("notificationclick", function(event) {
+  console.log("Notification received ", event);
+  event.notification.close();
+});
