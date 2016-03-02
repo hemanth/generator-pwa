@@ -71,7 +71,7 @@ function subscribePush() {
       console.log("Endpoint: ", subscription.endpoint);
 
       var temp = subscription.endpoint.split("/");
-      endpoint = temp[endpointTemp.length - 1];
+      endpoint = temp[temp.length - 1];
       localStorage.setItem("endpoint", JSON.stringify(endpoint));
       logCurlCommand(endpoint);
       changeStatus(true);
