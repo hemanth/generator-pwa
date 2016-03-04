@@ -63,6 +63,14 @@ module.exports = yeoman.generators.Base.extend({
       this.templatePath('manifest.json'),
       this.destinationPath('manifest.json')
     );
+    this.fs.copy(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json')
+    );
+    this.fs.copy(
+      this.templatePath('server.js'),
+      this.destinationPath('server.js')
+    );
   },
 
   install: function () {

@@ -1,4 +1,4 @@
-# generator-pwa [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] 
+# generator-pwa [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 > Progressive Webapp generator
 
 ## Installation
@@ -34,6 +34,12 @@ This would generate a dir structure like:
 |____sw.js
 ```
 
+## Run
+
+```bash
+  npm start
+```
+
 ##TODO
 
 * Add push notification and background sync.
@@ -42,7 +48,7 @@ This would generate a dir structure like:
 
 * AskFor static-cache-path (automatically pick the required files).
 
-* Use `serviceworker-cache-polyfill` from npm instead. 
+* Use `serviceworker-cache-polyfill` from npm instead.
 
 * Use `async-await` in `sw.js`.
 
@@ -62,4 +68,3 @@ MIT © [Hemanth.HM](https://h3manth.com)
 [npm-url]: https://npmjs.org/package/generator-pwa
 [travis-image]: https://travis-ci.org/hemanth/generator-pwa.svg?branch=master
 [travis-url]: https://travis-ci.org/hemanth/generator-pwa
-
