@@ -10,3 +10,79 @@
   font-weight: bolder;
 }
 
+button.hide {
+  display: none;
+}
+
+#send-push {
+  width: 230px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  background: #4F8EFA;
+  color: #fff;
+  border-radius: 2px;
+  margin: 30px auto -5px;
+  display: block;
+  cursor: pointer;
+  outline: 0;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
+  -o-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
+}
+
+#send-push:active {
+  box-shadow: none;
+}
+
+.custom-checkbox::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.51);
+}
+
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  width: 45px;
+  height: 16px;
+  border-radius: 8px;
+  background: rgb(173, 173, 173);
+  -webkit-transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
+  cursor: pointer;
+  margin: 11px;
+  margin-left: 30px;
+}
+
+.custom-button {
+  padding: 10px 15px;
+}
+
+input:checked + .custom-checkbox {
+  background: rgb(173, 173, 173);
+}
+
+input:checked + .custom-checkbox::before {
+  left: 25px;
+  background: #4F8EFA;
+}

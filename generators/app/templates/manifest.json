@@ -22,5 +22,7 @@
   }],
   "start_url": "/index.html?hs=1",
   "theme_color": "#a040a0",
-  "background_color": "#EEEEEE"
+  "background_color": "#EEEEEE",
+  "gcm_sender_id": "847244712742",
+  "gcm_user_visible_only": true
 }

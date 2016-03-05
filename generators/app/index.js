@@ -9,7 +9,7 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the peachy ' + chalk.red('generator-pwa') + ' generator!'
+      'Welcome to the peachy ' + chalk.red('Progresssive Web App') + ' generator!'
     ));
 
     done();
@@ -62,6 +62,14 @@ module.exports = yeoman.generators.Base.extend({
     this.fs.copy(
       this.templatePath('manifest.json'),
       this.destinationPath('manifest.json')
+    );
+    this.fs.copy(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json')
+    );
+    this.fs.copy(
+      this.templatePath('server.js'),
+      this.destinationPath('server.js')
     );
   },
 

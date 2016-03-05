@@ -3,10 +3,18 @@ importScripts('./sw-cache-polyfill.js');
 var CACHE_NAME = 'sw-ex';
 var CACHE_VERSION = 1;
 
+var filesToCache = [
+  '/',
+  '/index.html',
+  '/css/styles.css',
+  '/js/app.js',
+  '/images/yeoman.png'
+];
+
 self.oninstall = function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME + '-v' + CACHE_VERSION).then(function(cache) {
-      return cache.addAll(['/', '/index.html', '/images/yeoman.png']);
+      return cache.addAll(filesToCache);
     })
   );
 };
@@ -65,3 +73,37 @@ function sendMessage(message) {
     })
   });
 }
+
+/*
+  PUSH EVENT:
+    will be triggered when a push notification is received
+*/
+
+//To send notification to client
+self.addEventListener('push', function(event) {
+  console.log('Event: Push', event);
+
+  var title = 'Push notification demo';
+  var body = 'You have received a notification';
+  var tag = 'demo';
+  var icon = '/images/touch/icon-128x128.png';
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: body,
+      tag: tag,
+      icon: icon
+    })
+  );
+});
+
+/*
+  NOTIFICATION EVENT:
+    Will be triggered when user click the notification
+*/
+
+//On click event for notification to close
+self.addEventListener('notificationclick', function(event) {
+  console.log('Notification is clicked ', event);
+  event.notification.close();
+});
