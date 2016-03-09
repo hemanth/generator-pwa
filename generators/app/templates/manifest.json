@@ -1,7 +1,7 @@
 
 {
-  "short_name": "PWA",
-  "name": "Progressie WebApp",
+  "short_name": "<%= appName %>",
+  "name": "<%= appName %>",
   "display": "standalone",
   "icons": [{
         "src": "images/touch/icon-128x128.png",
@@ -22,7 +22,7 @@
   }],
   "start_url": "/index.html?hs=1",
   "theme_color": "#a040a0",
-  "background_color": "#EEEEEE",
-  "gcm_sender_id": "847244712742",
-  "gcm_user_visible_only": true
+  "background_color": "#EEEEEE"<%if(gcmSenderId){%>,
+  "gcm_sender_id": "<%= gcmSenderId %>"<%}if(gcmSenderId){%>,
+  "gcm_user_visible_only": true<%}%>
 }

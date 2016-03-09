@@ -2,6 +2,9 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var _ = require('underscore.string');
+var path = require('path');
+var pkg = require('../../package.json');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -12,68 +15,142 @@ module.exports = yeoman.generators.Base.extend({
       'Welcome to the peachy ' + chalk.red('Progresssive Web App') + ' generator!'
     ));
 
-    done();
+    this.log(
+      chalk.yellow('┌──────────────────────────────────────────────────────────────┐ \n' +
+                   '| Answer few questions to kick start your pwa application      | \n' +
+                   '└──────────────────────────────────────────────────────────────┘ ')
+    )
 
-    // No prompts as of now.
-    // var prompts = [{
-    //   type: 'confirm',
-    //   name: 'someOption',
-    //   message: 'Would you like to enable this option?',
-    //   default: true
-    // }];
+    //No prompts as of now.
+    var prompts = [{
+      name: 'appName',
+      message: 'What would you like to name your app?',
+      default: process.cwd().split(path.sep).pop()
+    },
+    {
+      type: 'confirm',
+      name: 'isPush',
+      message: 'Would you like to add push notification?',
+      default: true
+    },
+    {
+      type: 'input',
+      name: 'apiKey',
+      message: 'Enter push notification API key',
+      validate: function (apiKey) {
+        if (apiKey) {
+          return true
+        }
+        else {
+          return chalk.yellow('API key is required');
+        }
 
-    // this.prompt(prompts, function (props) {
-    //   this.props = props;
-    //   // To access props later use this.props.someOption;
+      },
+      when: function (answers) {
+        return answers.isPush;
+      }
+    },
+    {
+      type: 'input',
+      name: 'gcmSenderId',
+      message: 'Enter GCM sender id',
+      validate: function (apiKey) {
+        if (apiKey) {
+          return true
+        }
+        else {
+          return chalk.yellow('GCM sender id is required');
+        }
 
-    //   done();
-    // }.bind(this));
+      },
+      when: function (answers) {
+        return answers.isPush;
+      }
+    }];
+
+    this.prompt(prompts, function (props) {
+      this.props = props;
+      this.appName = _.camelize(_.slugify(_.humanize(props.appName)));
+      done();
+    }.bind(this));
   },
 
   writing: function () {
+
+    this.log(
+      chalk.yellow('\n┌──────────────────────────────────────────────────────────────┐ \n' +
+                     '| Creating the project structure                               | \n' +
+                     '└──────────────────────────────────────────────────────────────┘ ')
+    );
+
     this.fs.copy(
       this.templatePath('css'),
-      this.destinationPath('css')
+      this.destinationPath(this.appName + '/app/css')
     );
     this.fs.copy(
       this.templatePath('images'),
-      this.destinationPath('images')
+      this.destinationPath(this.appName + '/app/images')
     );
-    this.fs.copy(
-      this.templatePath('js'),
-      this.destinationPath('js')
+    this.fs.copyTpl(
+      this.templatePath('js/app.js'),
+      this.destinationPath(this.appName + '/app/js/app.js'),
+      { isPush: this.props.isPush }
     );
     this.fs.copy(
       this.templatePath('favicon.ico'),
-      this.destinationPath('favicon')
+      this.destinationPath(this.appName + '/app/favicon.ico')
     );
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('index.html'),
-      this.destinationPath('index.html')
+      this.destinationPath(this.appName + '/app/index.html'),
+      { isPush: this.props.isPush, appName: this.appName }
     );
     this.fs.copy(
       this.templatePath('sw.js'),
-      this.destinationPath('sw.js')
+      this.destinationPath(this.appName + '/app/sw.js')
     );
-    this.fs.copy(
-      this.templatePath('sw-cache-polyfill.js'),
-      this.destinationPath('sw-cache-polyfill.js')
-    );
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('manifest.json'),
-      this.destinationPath('manifest.json')
+      this.destinationPath(this.appName + '/app/manifest.json'),
+      { gcmSenderId: this.props.gcmSenderId, appName: this.appName }
     );
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('package.json'),
-      this.destinationPath('package.json')
+      this.destinationPath(this.appName + '/package.json'),
+      { appName: this.appName, isPush: this.props.isPush }
     );
     this.fs.copy(
-      this.templatePath('server.js'),
-      this.destinationPath('server.js')
+      this.templatePath('gitignore'),
+      this.destinationPath(this.appName + '/.gitignore')
     );
+    this.fs.copy(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath(this.appName + '/gulpfile.js')
+    );
+
+    //If push notifications is prompted
+    if (this.props.isPush) {
+      this.fs.copyTpl(
+        this.templatePath('server.js'),
+        this.destinationPath(this.appName + '/server.js'),
+        { apiKey: this.props.apiKey }
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('js/push.js'),
+        this.destinationPath(this.appName + '/app/js/push.js'),
+        { apiKey: this.props.apiKey }
+      );
+    }
   },
 
   install: function () {
+    this.log(
+      chalk.green('\n ✔  Project structure created successfully! \n\n') +
+      chalk.yellow('┌──────────────────────────────────────────────────────────────┐ \n' +
+                   '| Installating Dependencies, Please wait...                    | \n' +
+                   '└──────────────────────────────────────────────────────────────┘ ')
+    );
     this.installDependencies();
   }
 });

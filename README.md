@@ -17,7 +17,7 @@ yo pwa
 This would generate a dir structure like:
 
 ```sh
-.
+app/
 |____css
 | |____style.css
 |____favicon.ico
@@ -30,11 +30,18 @@ This would generate a dir structure like:
 |____index.html
 |____js
 | |____app.js
-|____sw-cache-polyfill.js
+| |____push.js
+|____server.js
 |____sw.js
 ```
 
 ## Run
+
+```bash
+  gulp
+```
+
+*For push notification*
 
 ```bash
   npm start
@@ -42,21 +49,23 @@ This would generate a dir structure like:
 
 ##TODO
 
-* Add push notification and background sync.
+- [ ] - Prompt for all `manifest.json` related fields.
 
-* Prompt for all `manifest.json` related fields.
+- [ ] - AskFor static-cache-path (automatically pick the required files).
 
-* AskFor static-cache-path (automatically pick the required files).
+- [x] - Use `serviceworker-cache-polyfill` from npm instead.
 
-* Use `serviceworker-cache-polyfill` from npm instead.
+- [ ] - Use `async-await` in `sw.js`.
 
-* Use `async-await` in `sw.js`.
+- [x] - Add simple push notification.
 
-* Add simple push notification and background sync.
+- [x] - Prompt for GCM api keys.
 
-* Work on a build system, `npm-script` or `gulp`.
+- [ ] - Add background sync.
 
-* Add a gif!
+- [x] - Work on a build system, `npm-script` or `gulp`.
+
+- [ ] - Add a gif!
 
 
 ## License

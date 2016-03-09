@@ -1,4 +1,4 @@
-importScripts('./sw-cache-polyfill.js');
+require('serviceworker-cache-polyfill');
 
 var CACHE_NAME = 'sw-ex';
 var CACHE_VERSION = 1;
