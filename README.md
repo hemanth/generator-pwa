@@ -51,19 +51,11 @@ app/
 
 - [ ] - Prompt for all `manifest.json` related fields.
 
-- [ ] - AskFor static-cache-path (automatically pick the required files).
-
-- [x] - Use `serviceworker-cache-polyfill` from npm instead.
+- [ ] - AskFor static-cache-path (automatically pick the required files)?
 
 - [ ] - Use `async-await` in `sw.js`.
 
-- [x] - Add simple push notification.
-
-- [x] - Prompt for GCM api keys.
-
 - [ ] - Add background sync.
-
-- [x] - Work on a build system, `npm-script` or `gulp`.
 
 - [ ] - Add a gif!
 
