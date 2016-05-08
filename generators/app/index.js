@@ -31,7 +31,7 @@ module.exports = yeomanBase.extend({
             type: 'confirm',
             name: 'isPush',
             message: 'Would you like to add push notification?',
-            default: true
+            default: false
         },
         {
             type: 'input',
@@ -84,39 +84,39 @@ module.exports = yeomanBase.extend({
 
         this.fs.copy(
           this.templatePath('css'),
-          this.destinationPath(this.appName + '/app/css')
+          this.destinationPath(this.appName + '/css')
         );
 
         this.fs.copy(
           this.templatePath('images'),
-          this.destinationPath(this.appName + '/app/images')
+          this.destinationPath(this.appName + '/images')
         );
 
         this.fs.copyTpl(
           this.templatePath('js/app.js'),
-          this.destinationPath(this.appName + '/app/js/app.js'),
+          this.destinationPath(this.appName + '/js/app.js'),
           { isPush: this.props.isPush }
         );
 
         this.fs.copy(
           this.templatePath('favicon.ico'),
-          this.destinationPath(this.appName + '/app/favicon.ico')
+          this.destinationPath(this.appName + '/favicon.ico')
         );
 
         this.fs.copyTpl(
           this.templatePath('index.html'),
-          this.destinationPath(this.appName + '/app/index.html'),
+          this.destinationPath(this.appName + '/index.html'),
           { isPush: this.props.isPush, appName: this.appName }
         );
 
         this.fs.copy(
           this.templatePath('sw.js'),
-          this.destinationPath(this.appName + '/app/sw.js')
+          this.destinationPath(this.appName + '/sw.js')
         );
 
         this.fs.copyTpl(
           this.templatePath('manifest.json'),
-          this.destinationPath(this.appName + '/app/manifest.json'),
+          this.destinationPath(this.appName + '/manifest.json'),
           { gcmSenderId: this.props.gcmSenderId, appName: this.appName }
         );
 
@@ -141,7 +141,7 @@ module.exports = yeomanBase.extend({
 
             this.fs.copyTpl(
               this.templatePath('js/push.js'),
-              this.destinationPath(this.appName + '/app/js/push.js'),
+              this.destinationPath(this.appName + '/js/push.js'),
               { apiKey: this.props.apiKey }
             );
         }
