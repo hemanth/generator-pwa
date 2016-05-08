@@ -10,6 +10,7 @@
   font-weight: bolder;
 }
 
+<%if(isPush){%>
 button.hide {
   display: none;
 }
@@ -86,3 +87,4 @@ input:checked + .custom-checkbox::before {
   left: 25px;
   background: #4F8EFA;
 }
+<%}%>

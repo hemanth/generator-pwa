@@ -6,7 +6,8 @@ var filesToCache = [
   '/index.html',
   '/css/styles.css',
   '/js/app.js',
-  '/images/yeoman.png'
+  '/images/yeoman.png',
+  '/images/touch/chrome-touch-icon-192x192.png'
 ];
 
 self.oninstall = function(event) {
@@ -72,6 +73,7 @@ function sendMessage(message) {
   });
 }
 
+<%if(isPush){%>
 /*
   PUSH EVENT:
     will be triggered when a push notification is received
@@ -105,3 +107,4 @@ self.addEventListener('notificationclick', function(event) {
   console.log('Notification is clicked ', event);
   event.notification.close();
 });
+<%}%>

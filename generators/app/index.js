@@ -82,9 +82,10 @@ module.exports = yeomanBase.extend({
                          '└──────────────────────────────────────────────────────────────┘ ')
         );
 
-        this.fs.copy(
+        this.fs.copyTpl(
           this.templatePath('css'),
-          this.destinationPath(this.appName + '/css')
+          this.destinationPath(this.appName + '/css'),
+          { isPush: this.props.isPush }
         );
 
         this.fs.copy(
@@ -109,9 +110,10 @@ module.exports = yeomanBase.extend({
           { isPush: this.props.isPush, appName: this.appName }
         );
 
-        this.fs.copy(
+        this.fs.copyTpl(
           this.templatePath('sw.js'),
-          this.destinationPath(this.appName + '/sw.js')
+          this.destinationPath(this.appName + '/sw.js'),
+          { isPush: this.props.isPush }
         );
 
         this.fs.copyTpl(
@@ -133,17 +135,24 @@ module.exports = yeomanBase.extend({
 
         //If push notifications is prompted
         if (this.props.isPush) {
-            this.fs.copyTpl(
-                this.templatePath('server.js'),
-                this.destinationPath(this.appName + '/server.js'),
-                { apiKey: this.props.apiKey }
-              );
+          this.fs.copyTpl(
+            this.templatePath('server.js'),
+            this.destinationPath(this.appName + '/server.js'),
+            { apiKey: this.props.apiKey, isPush: this.props.isPush }
+          );
 
-            this.fs.copyTpl(
-              this.templatePath('js/push.js'),
-              this.destinationPath(this.appName + '/js/push.js'),
-              { apiKey: this.props.apiKey }
-            );
+          this.fs.copyTpl(
+            this.templatePath('js/push.js'),
+            this.destinationPath(this.appName + '/js/push.js'),
+            { apiKey: this.props.apiKey }
+          );
+        }
+        else {
+          this.fs.copyTpl(
+            this.templatePath('server.js'),
+            this.destinationPath(this.appName + '/server.js'),
+            { apiKey: this.props.apiKey, isPush: this.props.isPush }
+          );
         }
     },
 
