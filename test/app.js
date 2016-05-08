@@ -12,6 +12,6 @@ describe('generator-pwa:app', function () {
     });
 
     it('creates files', function () {
-        assert.file('app/css favicon images index.html js manifest.json sw-cache-polyfill.js sw.js'.split(' '));
+        assert.file('css favicon images index.html js manifest.json sw-cache-polyfill.js sw.js'.split(' '));
     });
 });
