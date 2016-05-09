@@ -46,5 +46,8 @@
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+      "node": ">=4"
+  }
 }
