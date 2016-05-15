@@ -25,15 +25,17 @@
     "yosay": "^1.1.0"
   },
   "devDependencies": {
-    "yeoman-assert": "^2.1.2",
+    "ava": "^0.14.0",
     "eslint-config-xo-space": "^0.11.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^2.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-istanbul": "^0.10.4",
     "gulp-mocha": "^2.2.0",
+    "gulp-nsp": "^2.4.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-nsp": "^2.4.0"
+    "pify": "^2.3.0",
+    "yeoman-assert": "^2.1.2"
   },
   "eslintConfig": {
     "extends": "xo-space",
@@ -48,6 +50,6 @@
   },
   "license": "MIT",
   "engines": {
-      "node": ">=4"
+    "node": ">=4"
   }
 }

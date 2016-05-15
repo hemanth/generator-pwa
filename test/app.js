@@ -1,27 +1,27 @@
 'use strict';
 
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+import path from 'path';
+import test from 'ava';
+import helpers from 'yeoman-test';
+import assert from 'yeoman-assert';
+import pify from 'pify';
 
-var prompts = {
-  appName: 'test',
-  isPush: true,
-  apiKey: 123,
-  gcmSenderId: 123
-};
+let generator;
 
-var options = {};
+test.beforeEach(async () => {
 
-describe('generator-pwa:app', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/app'))
-    .withOptions(options)
-    .withPrompts(prompts)
-    .on('end', done);
+  await pify(helpers.testDirectory)(path.join(__dirname, 'temp'));
+  generator = helpers.createGenerator('pwa', ['../../generators/app/'], null, {skipInstall: true});
+});
+
+test.serial('generates expected files', async () => {
+  helpers.mockPrompt(generator, {
+    appName: 'test',
+    isPush: false,
   });
 
-  it('creates files', function () {
-    assert.file('test/css test/css/styles.css test/favicon.ico test/images test/index.html test/js test/js/app.js test/manifest.json test/sw.js test/server.js'.split(' '));
-  });
+  await pify(generator.run.bind(generator))();
+
+  assert.file('test/css test/css/styles.css test/favicon.ico test/images test/index.html test/js test/js/app.js test/manifest.json test/sw.js test/server.js'.split(' '));
+  
 });
