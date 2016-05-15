@@ -46,7 +46,7 @@
   "repository": "hemanth/generator-pwa",
   "scripts": {
     "prepublish": "gulp prepublish",
-    "test": "gulp"
+    "test": "ava"
   },
   "license": "MIT",
   "engines": {
