@@ -1,3 +1,4 @@
+(function() {
 var CACHE_NAME = 'sw-ex';
 var CACHE_VERSION = 1;
 
@@ -10,15 +11,15 @@ var filesToCache = [
   '/images/touch/chrome-touch-icon-192x192.png'
 ];
 
-self.oninstall = function(event) {
+self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME + '-v' + CACHE_VERSION).then(function(cache) {
       return cache.addAll(filesToCache);
     })
   );
-};
+});
 
-self.onactivate = function(event) {
+self.addEventListener('activate', function(event) {
   var currentCacheName = CACHE_NAME + '-v' + CACHE_VERSION;
   caches.keys().then(function(cacheNames) {
     return Promise.all(
@@ -33,9 +34,9 @@ self.onactivate = function(event) {
       })
     );
   });
-};
+});
 
-self.onfetch = function(event) {
+self.addEventListener('fetch', function(event) {
   var request = event.request;
   event.respondWith(
     caches.match(request).then(function(response) {
@@ -55,29 +56,9 @@ self.onfetch = function(event) {
       });
     })
   );
-};
-
-
-// Communicate via MessageChannel.
-self.addEventListener('message', function(event) {
-  console.log(`Received message from main thread: ${event.data}`);
-  event.ports[0].postMessage(`Got message! Sending direct message back - "${event.data}"`);
 });
 
-// Broadcast via postMessage.
-function sendMessage(message) {
-  self.clients.matchAll().then(function(clients) {
-    clients.map(function(client) {
-      return client.postMessage(message);
-    })
-  });
-}
-
 <%if(isPush){%>
-/*
-  PUSH EVENT:
-    will be triggered when a push notification is received
-*/
 
 //To send notification to client
 self.addEventListener('push', function(event) {
@@ -97,14 +78,31 @@ self.addEventListener('push', function(event) {
   );
 });
 
-/*
-  NOTIFICATION EVENT:
-    Will be triggered when user click the notification
-*/
-
 //On click event for notification to close
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification is clicked ', event);
   event.notification.close();
 });
 <%}%>
+
+<%if(isBGsync){%>
+// Background Sync.
+self.addEventListener('sync', function(event) {
+  console.log('Event: Push', event);
+
+  var title = 'Background Sync event!';
+  var body = 'App has updated in the background.'
+  var tag = 'demo';
+  var icon = '/images/touch/icon-128x128.png';
+
+  event.waitUntil(
+    // You can play around with data here.
+    self.registration.showNotification(title, {
+      body: body,
+      tag: tag,
+      icon: icon
+    })
+  );  
+});
+<%}%>
+}())

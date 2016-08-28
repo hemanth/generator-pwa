@@ -34,6 +34,12 @@ module.exports = yeomanBase.extend({
             default: false
         },
         {
+            type: 'confirm',
+            name: 'isBGsync',
+            message: 'Would you like to add background sync?',
+            default: false
+        },
+        {
             type: 'input',
             name: 'apiKey',
             message: 'Enter push notification API key',
