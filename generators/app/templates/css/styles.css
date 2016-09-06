@@ -1,40 +1,56 @@
-#content > img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width:100%;
+#app {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-#content > p {
+#app > img {
+  display: block;
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+#app > p {
   text-align: center;
   font-weight: bolder;
 }
-
 <%if(isPush){%>
-button.hide {
-  display: none;
-}
-
-#send-push {
-  width: 230px;
+button {
+  min-width: 100px;
   height: 40px;
-  font-size: 15px;
+  font-size: 14px;
   border: 0;
   background: #4F8EFA;
   color: #fff;
   border-radius: 2px;
-  margin: 30px auto -5px;
-  display: block;
+  margin: 0 auto -5px;
+  display: inline-block;
   cursor: pointer;
   outline: 0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
   -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
   -o-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
+  -webkit-user-select: none;
 }
 
-#send-push:active {
+button:active {
   box-shadow: none;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+button:disabled {
+  background: #ccc;
+  color: #000;
+  cursor: not-allowed;
 }
 
 .custom-checkbox::before {
@@ -86,5 +102,22 @@ input:checked + .custom-checkbox {
 input:checked + .custom-checkbox::before {
   left: 25px;
   background: #4F8EFA;
+}
+<%}%>
+<%if(isBGsync){%>
+.bg-sync-text {
+  font-size: 12px;
+  padding-left: 5px;
+  color: #008000;
+}
+
+.turn-on-sync {
+  min-width: 50px;
+  height: 28px;
+  margin-left: 10px;
+}
+
+.custom-button-bg.hide {
+  display: none;
 }
 <%}%>

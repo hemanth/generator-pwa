@@ -1,43 +1,16 @@
-function updateFound() {
-  const latestWorker = this.installing;
-
-  // Wait for new SW installation.
-  latestWorker.addEventListener('statechange', function() {
-    switch (installingWorker.state) {
-      case 'installed':
-        // Installed, confrim a reload.
-        if (navigator.serviceWorker.controller &&
-            window.confirm('This page has been updated, do you want to load it?')) {
-          window.location.reload();
-          return;
-        }
-        break;
-
-      case 'redundant':
-        console.error('This SW is redundant :(');
-        break;
-    }
-  });
-}
-
+//If `service worker` is supported, then register it.
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('../sw.js', { scope: '/' }).then((registration) => {
+	navigator.serviceWorker.register('../serviceWorker.js', { scope: '/' }).then((registration) => {
 		if (registration.installing) {
-			console.log('Service worker installing');
-		} else if(registration.waiting) {
-			console.log('Service worker installed');
-		} else if(registration.active) {
-			console.log('Service worker active');
+			console.info('Service worker installing.');
 		}
-    
-    registration.addEventListener('updatefound', updateFound);
-
-		<% if (isPush) { %>
-		isPushNotification(reg); // Check push is supported and enabled already
-		<% } %>
+    else if (registration.waiting) {
+			console.info('Service worker installed.');
+		}
+    else if (registration.active) {
+			console.info('Service worker active.');
+		}
 	}).catch((error) => {
-		console.log('Registration failed with ' + error); // Registration failed
+		console.error('Service worker registration failed ', error);
 	});
 }
-
-

@@ -22,20 +22,33 @@
     <meta name="theme-color" content="#2F3BA2">
   </head>
   <body>
-    <div id="content">
+    <div id="app">
        <img src="images/yeoman.png" />
        <p> Check the console for service worker logs and after sw is active this image will load even when you are offline! </p>
       <%if(isPush){%>
-       <p class="custom-button">Enable Push Notifications:
-         <input id="turn-on-notification" type="checkbox" hidden="hidden" class="custom-input" data-checked="">
-         <label for="turn-on-notification" class="custom-checkbox"></label>
-       </p>
-       <button id="send-push" style="display:none">Send Push Notification</button>
+        <h3>Push Notification: </h3>
+         <p class="custom-button">
+           <input id="turn-on-notification" type="checkbox" class="custom-input" data-checked="" hidden="hidden"/>
+           <label for="turn-on-notification" class="custom-checkbox"></label>
+           <button class="send-push" disabled>Send Push Notification</button>
+         </p>
+      <%}%>
+      <%if(isBGsync){%>
+        <h3>Enable OneTime BG Sync:
+          <span class="bg-sync-text" hidden>Registered</span>
+          <p class="custom-button custom-button-bg">
+            <button class="turn-on-sync">Register</button>
+          </p>
+        </h3>
       <%}%>
     </div>
-  </body>
+
   <%if(isPush){%>
   <script src="/js/push.js"></script>
   <%}%>
+  <%if(isBGsync){%>
+  <script src="/js/sync.js"></script>
+  <%}%>
   <script src="/js/app.js"></script>
+  </body>
 </html>

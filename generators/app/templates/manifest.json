@@ -20,7 +20,7 @@
         "sizes": "192x192",
         "type": "image/png"
   }],
-  "start_url": "/index.html?hs=1",
+  "start_url": "/index.html?utm=homescreen",
   "theme_color": "#a040a0",
   "background_color": "#EEEEEE"<%if(gcmSenderId){%>,
   "gcm_sender_id": "<%= gcmSenderId %>"<%}if(gcmSenderId){%>,

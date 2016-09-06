@@ -1,138 +1,142 @@
-//Push notification button
-const btn = document.getElementById('turn-on-notification');
+(function () {
+  'use strict';
 
-//Tokens
-const apiKey = 'AIzaSyCjrU5SqotSg2ybDLK_7rMMt9Rv0dMusvY'; //API key
-const gcmURL = 'https://android.googleapis.com/gcm/send';
+  //Push notification buttons
+  const notificationBtnElement = document.querySelector('#turn-on-notification');
+  const pushBtnElement = document.querySelector('.send-push');
 
-//To check push notification support
-function isPushNotification(reg) {
-  reg.pushManager.getSubscription()
-  .then((subscription) => {
-    console.log('Push Notification Status: ', subscription);
-    //If already access granted, change status
-    if (subscription) {
-      changeStatus(true);
-    }
-    else {
-      changeStatus(false);
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-}
-
-//To subscript push notification
-function subscribe() {
-  navigator.serviceWorker.ready
-  .then((registration) => {
-    if (!registration.pushManager) {
-      alert('Your browser doesn\'t support push notifications');
+  //To check `push notification` is supported
+  function isPushSupported() {
+    //To check `notification` permission is denied by user
+    if (Notification && Notification.permission === 'denied') {
+      console.warn('User has blocked notifications.');
       return;
     }
 
-    registration.pushManager.subscribe({
-      userVisibleOnly: true //To always show notification when received
-    })
-    .then((subscription) => {
-      console.log('Successfully subscribed: ', subscription);
-      changeStatus(true);
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-  })
-}
+    //Check `push notification` is supported or not
+    if (!('PushManager' in window)) {
+      console.warn('Push notification isn\'t supported in your browser.');
+      return;
+    }
 
-//To unsubscribe push notification
-function unsubscribe() {
-  navigator.serviceWorker.ready
-  .then((registration) => {
-    registration.pushManager.getSubscription()
-    .then((subscription) => {
-      //If not push subscription, then return
-      if(!subscription) {
-        console.error('Unable to unregister from push notification');
-        return;
-      }
-
-      //Unsubscribe
-      subscription.unsubscribe()
-        .then(() => {
-          console.log('Successfully unsubscribed');
-          changeStatus(false);
+    //Get `push notification` subscription, check if push is already subscribed/unsubscribed
+    navigator.serviceWorker.ready
+      .then(function (registration) {
+        registration.pushManager.getSubscription()
+        .then((subscription) => {
+          console.info('Push notification status:', !!subscription);
+          //If already access granted, change status
+          if (subscription) {
+            changePushStatus(true);
+          }
+          else {
+            changePushStatus(false);
+          }
         })
         .catch((error) => {
-          console.error(error);
+          console.error('Error occurred while enabling push ', error);
         });
-    })
-    .catch((error) => {
-      console.error('Failed to unsubscribe push notification');
     });
-  })
-}
-
-
-//To send push notification
-const pushBtn = document.getElementById('send-push');
-pushBtn.addEventListener('click', () => {
-  sendPushNotification();
-});
-
-//To change status
-function changeStatus(status) {
-  btn.dataset.checked = status;
-  btn.checked = status;
-  if (status) {
-    pushBtn.style.display = 'block';
   }
-  else {
-    pushBtn.style.display = 'none';
-  }
-}
 
-//Click event for subscribe btn
-btn.addEventListener('click', () => {
-  var isBtnChecked = (btn.dataset.checked === 'true');
-  if (isBtnChecked) {
-    unsubscribe();
+  //To subscribe `push notification`
+  function subscribePush() {
+    navigator.serviceWorker.ready
+    .then((registration) => {
+      registration.pushManager.subscribe({
+        userVisibleOnly: true //To always show notification when received
+      })
+      .then((subscription) => {
+        console.info('Push notification subscribed.');
+        changePushStatus(true);
+      })
+      .catch((error) => {
+        console.error('Push notification subscription error: ', error);
+      })
+    })
   }
-  else {
-    subscribe();
-  }
-});
 
-//To generate curl command to send push notification
-function curlCommand(subscription) {
-  var temp = subscription.endpoint.split('/');
-  var endpoint = temp[temp.length - 1];
-  var curlCommand = 'curl --header "Authorization: key=' + apiKey + '" --header Content-Type:"application/json" ' + gcmURL + ' -d "{\\"registration_ids\\":[\\"' + endpoint + '\\"]}"';
-  console.log('%ccurl command: ', 'background: #000; color: #fff; font-size: 16px;');
-  console.log(curlCommand);
-}
-
-//Form data with info to send to server
-function sendPushNotification(subscription) {
-  navigator.serviceWorker.ready
+  //To unsubscribe `push notification`
+  function unsubscribePush() {
+    navigator.serviceWorker.ready
     .then((registration) => {
       registration.pushManager.getSubscription()
       .then((subscription) => {
-        curlCommand(subscription); //To log curl command in console
-        fetch('/send_notification', {
-          method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(subscription)
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.error('data', data);
+        //If no `push subscription`, then return
+        if(!subscription) {
+          console.error('Unable to unregister push notification.');
+          return;
+        }
+
+        //Unsubscribe `push notification`
+        subscription.unsubscribe()
+          .then(() => {
+            console.info('Push notification unsubscribed.');
+            changePushStatus(false);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      })
+      .catch((error) => {
+        console.error('Failed to unsubscribe push notification.');
+      });
+    })
+  }
+
+  //To change 'push notification' toggle status
+  function changePushStatus(status) {
+    notificationBtnElement.dataset.checked = status;
+    notificationBtnElement.checked = status;
+    if (status) {
+      pushBtnElement.removeAttribute('disabled');
+    }
+    else {
+      pushBtnElement.setAttribute('disabled', true);
+    }
+  }
+
+  //Subscribe/Unsubscribe notification toggle button event
+  notificationBtnElement.addEventListener('click', () => {
+    var isBtnChecked = (notificationBtnElement.dataset.checked === 'true');
+    if (isBtnChecked) {
+      unsubscribePush();
+    }
+    else {
+      subscribePush();
+    }
+  });
+
+  //To send `push notification` request to server
+  function sendPushNotification(subscription) {
+    navigator.serviceWorker.ready
+      .then((registration) => {
+        registration.pushManager.getSubscription()
+        .then((subscription) => {
+          //Send `push notification` - source for below url `server.js`
+          fetch('/send_notification', {
+            method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(subscription)
+          })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.error('Error occurred while sending push notification ', data);
+          })
         })
       })
-    })
-}
+  }
+
+  //To send `push notification`
+  pushBtnElement.addEventListener("click", function () {
+    sendPushNotification();
+  }, false);
+
+  //Check for push notification support
+  isPushSupported();
+})();
