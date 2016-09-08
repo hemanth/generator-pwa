@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	
+
 	//Listen to `offline/online` event
 	window.addEventListener('offline', updateNetworkStatus, false);
 	window.addEventListener('online', updateNetworkStatus, false);

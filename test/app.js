@@ -22,6 +22,5 @@ test.serial('generates expected files', async () => {
 
   await pify(generator.run.bind(generator))();
 
-  assert.file('test/css test/css/styles.css test/favicon.ico test/images test/index.html test/js test/js/app.js test/manifest.json test/sw.js test/server.js'.split(' '));
-  
+  assert.file('test/css test/css/styles.css test/favicon.ico test/images test/index.html test/js test/js/app.js test/manifest.json test/serviceWorker.js test/server.js'.split(' '));
 });
