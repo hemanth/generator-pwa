@@ -92,7 +92,7 @@ module.exports = yeomanBase.extend({
     this.fs.copyTpl(
       this.templatePath('css'),
       this.destinationPath(this.appName + '/css'),
-      { isPush: this.props.isPush, isBGsync: this.props.isBGsync }
+      { isPush: this.props.isPush }
     );
 
     this.fs.copy(
@@ -114,7 +114,7 @@ module.exports = yeomanBase.extend({
     this.fs.copyTpl(
       this.templatePath('index.html'),
       this.destinationPath(this.appName + '/index.html'),
-      { isPush: this.props.isPush, appName: this.appName, isBGsync: this.props.isBGsync }
+      { isPush: this.props.isPush, appName: this.appName }
     );
 
     this.fs.copyTpl(
@@ -151,14 +151,6 @@ module.exports = yeomanBase.extend({
       this.fs.copy(
         this.templatePath('js/push.js'),
         this.destinationPath(this.appName + '/js/push.js')
-      );
-    }
-
-    //If BG Sync is prompted
-    if (this.props.isBGsync) {
-      this.fs.copy(
-        this.templatePath('js/sync.js'),
-        this.destinationPath(this.appName + '/js/sync.js')
       );
     }
   },

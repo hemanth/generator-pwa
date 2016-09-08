@@ -1,6 +1,4 @@
-#app {
-  margin: 0 auto;
-  text-align: center;
+body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
@@ -9,21 +7,28 @@
   margin: 0;
 }
 
-#app > img {
+#app {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#app img {
   display: block;
   margin: 0 auto;
   max-width: 50%;
 }
 
-#app > p {
+#app p {
   text-align: center;
-  font-weight: bolder;
+  font-weight: 500;
+  width: 80%;
+  margin: 30px auto;
 }
 <%if(isPush){%>
 button {
   min-width: 100px;
-  height: 40px;
-  font-size: 14px;
+  height: 35px;
+  font-size: 13px;
   border: 0;
   background: #4F8EFA;
   color: #fff;
@@ -37,14 +42,11 @@ button {
   -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
   -o-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
   -webkit-user-select: none;
+  margin-left: 20px;
 }
 
 button:active {
   box-shadow: none;
-}
-
-h3 {
-  font-weight: 500;
 }
 
 button:disabled {
@@ -91,10 +93,6 @@ button:disabled {
   margin-left: 30px;
 }
 
-.custom-button {
-  padding: 10px 15px;
-}
-
 input:checked + .custom-checkbox {
   background: rgb(173, 173, 173);
 }
@@ -102,22 +100,5 @@ input:checked + .custom-checkbox {
 input:checked + .custom-checkbox::before {
   left: 25px;
   background: #4F8EFA;
-}
-<%}%>
-<%if(isBGsync){%>
-.bg-sync-text {
-  font-size: 12px;
-  padding-left: 5px;
-  color: #008000;
-}
-
-.turn-on-sync {
-  min-width: 50px;
-  height: 28px;
-  margin-left: 10px;
-}
-
-.custom-button-bg.hide {
-  display: none;
 }
 <%}%>

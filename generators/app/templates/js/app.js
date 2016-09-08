@@ -1,16 +1,18 @@
-//If `service worker` is supported, then register it.
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('../serviceWorker.js', { scope: '/' }).then((registration) => {
-		if (registration.installing) {
-			console.info('Service worker installing.');
+(function () {
+	'use strict';
+	
+	//Listen to `offline/online` event
+	window.addEventListener('offline', updateNetworkStatus, false);
+	window.addEventListener('online', updateNetworkStatus, false);
+
+	function updateNetworkStatus() {
+		if (navigator.onLine) {
+			console.info('Application is online.');
 		}
-    else if (registration.waiting) {
-			console.info('Service worker installed.');
+		else {
+			console.info('Application is offline.');
 		}
-    else if (registration.active) {
-			console.info('Service worker active.');
-		}
-	}).catch((error) => {
-		console.error('Service worker registration failed ', error);
-	});
-}
+	}
+
+	updateNetworkStatus(); //Check user connectivity initially
+})();

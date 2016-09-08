@@ -4,11 +4,10 @@ var CACHE_VERSION = 1;
 var files = [
   '/',
   '/index.html',
-  '/index.html?utm=homescreen',
+  '/index.html?utm_source=homescreen',
   '/css/styles.css',
   '/js/app.js',
   <%if(isPush){%>'/js/push.js',<%}%>
-  <%if(isBGsync){%>'/js/sync.js',<%}%>
   '/images/yeoman.png',
   '/images/touch/chrome-touch-icon-192x192.png',
   '/manifest.json'
@@ -103,7 +102,6 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 });
 <%}%>
-
 <%if(isBGsync){%>
 //Adding `sync` event listener
 self.addEventListener('sync', function(event) {
