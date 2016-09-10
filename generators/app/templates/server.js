@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 <%if(isPush){%>
 var bodyParser = require('body-parser');
-var gcm = require('node-gcm');
 
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,30 +24,23 @@ app.get('/', function (req, res) {
 
 <%if(isPush){%>
 //To receive push request from client
-app.post('/send_notification', function (req, res) {
-  if (!req.body) {
-    res.status(400);
-  }
-
-  var message = new gcm.Message();
-  var temp = req.body.endpoint.split('/'); //End point send from client
-  var regTokens = [temp[temp.length - 1]];
-
-  var sender = new gcm.Sender("<%= apiKey %>"); //API key
-
-  // Now the sender can be used to send messages
-  sender.send(message, { registrationTokens: regTokens }, function (error, response) {
-  	if (error) {
-      console.error(error);
-      res.status(400);
-    }
-  	else {
-     	console.log(response);
-      res.status(200);
-    }
-  });
+const webPush = require('web-push');
+webPush.setGCMAPIKey(require('./manifest.json').gcm_sender_id);
+app.post('/sendNotification', function(req, res) {
+  setTimeout(function() {
+    webPush.sendNotification(req.query.endpoint || '/sendNotification', {
+      TTL: req.query.ttl || 10,
+    })
+    .then(function() {
+      res.sendStatus(201);
+    });
+  }, (req.query.delay || 1) * 1000);
 });
 <%}%>
+
+// Start the server.
 app.listen(process.env.PORT || 3000, function() {
   console.log('Local Server : http://localhost:3000');
 });
+
+
