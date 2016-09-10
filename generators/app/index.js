@@ -89,10 +89,9 @@ module.exports = yeomanBase.extend({
                      '└──────────────────────────────────────────────────────────────┘ ')
     );
 
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('css'),
-      this.destinationPath(this.appName + '/css'),
-      { isPush: this.props.isPush }
+      this.destinationPath(this.appName + '/css')
     );
 
     this.fs.copy(
@@ -145,14 +144,6 @@ module.exports = yeomanBase.extend({
       this.destinationPath(this.appName + '/server.js'),
       { apiKey: this.props.apiKey, isPush: this.props.isPush }
     );
-
-    //If push notifications is prompted
-    if (this.props.isPush) {
-      this.fs.copy(
-        this.templatePath('js/push.js'),
-        this.destinationPath(this.appName + '/js/push.js')
-      );
-    }
   },
 
   install: function () {
