@@ -7,7 +7,6 @@ var files = [
   '/index.html?utm_source=homescreen',
   '/css/styles.css',
   '/js/app.js',
-  <%if(isPush){%>'/js/push.js',<%}%>
   '/images/yeoman.png',
   '/images/touch/chrome-touch-icon-192x192.png',
   '/manifest.json'

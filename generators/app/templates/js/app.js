@@ -15,7 +15,7 @@
 	}
 
 	//To check `push notification` is supported
-  function isPushSupported() {
+  function canPush() {
     //To check `notification` permission is denied by user
     if (Notification && Notification.permission === 'denied') {
       console.warn('User has blocked notifications.');
@@ -62,33 +62,6 @@
     })
   }
 
-  //To unsubscribe `push notification`
-  function unsubscribePush() {
-    navigator.serviceWorker.ready
-    .then((registration) => {
-      registration.pushManager.getSubscription()
-      .then((subscription) => {
-        //If no `push subscription`, then return
-        if(!subscription) {
-          console.error('Unable to unregister push notification.');
-          return;
-        }
-
-        //Unsubscribe `push notification`
-        subscription.unsubscribe()
-          .then(() => {
-            console.info('Push notification unsubscribed.');
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      })
-      .catch((error) => {
-        console.error('Failed to unsubscribe push notification.');
-      });
-    })
-  }
-
   //To send `push notification` request to server
   function sendPushNotification(subscription) {
     navigator.serviceWorker.ready
@@ -114,6 +87,6 @@
       })
   }
 
-  isPushSupported(); //Check for push notification support
-	updateNetworkStatus(); //Check user connectivity initially
+  canPush(); //Check for push notification support.
+  updateNetworkStatus(); //Check user connectivity initially.
 })();
