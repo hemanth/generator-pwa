@@ -1,10 +1,6 @@
 (function () {
   'use strict';
 
-  //Push notification buttons
-  const notificationBtnElement = document.querySelector('#turn-on-notification');
-  const pushBtnElement = document.querySelector('.send-push');
-
   //To check `push notification` is supported
   function isPushSupported() {
     //To check `notification` permission is denied by user
@@ -26,11 +22,8 @@
         .then((subscription) => {
           console.info('Push notification status:', !!subscription);
           //If already access granted, change status
-          if (subscription) {
-            changePushStatus(true);
-          }
-          else {
-            changePushStatus(false);
+          if (!subscription) {
+            subscribePush()
           }
         })
         .catch((error) => {
@@ -48,7 +41,7 @@
       })
       .then((subscription) => {
         console.info('Push notification subscribed.');
-        changePushStatus(true);
+        sendPushNotification(); //send a push notification after confirmation.
       })
       .catch((error) => {
         console.error('Push notification subscription error: ', error);
@@ -72,7 +65,6 @@
         subscription.unsubscribe()
           .then(() => {
             console.info('Push notification unsubscribed.');
-            changePushStatus(false);
           })
           .catch((error) => {
             console.error(error);
@@ -83,29 +75,6 @@
       });
     })
   }
-
-  //To change 'push notification' toggle status
-  function changePushStatus(status) {
-    notificationBtnElement.dataset.checked = status;
-    notificationBtnElement.checked = status;
-    if (status) {
-      pushBtnElement.removeAttribute('disabled');
-    }
-    else {
-      pushBtnElement.setAttribute('disabled', true);
-    }
-  }
-
-  //Subscribe/Unsubscribe notification toggle button event
-  notificationBtnElement.addEventListener('click', () => {
-    var isBtnChecked = (notificationBtnElement.dataset.checked === 'true');
-    if (isBtnChecked) {
-      unsubscribePush();
-    }
-    else {
-      subscribePush();
-    }
-  });
 
   //To send `push notification` request to server
   function sendPushNotification(subscription) {
@@ -131,11 +100,6 @@
         })
       })
   }
-
-  //To send `push notification`
-  pushBtnElement.addEventListener("click", function () {
-    sendPushNotification();
-  }, false);
 
   //Check for push notification support
   isPushSupported();
