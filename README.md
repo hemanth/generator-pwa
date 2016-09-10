@@ -1,11 +1,11 @@
 # generator-pwa [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
-> Progressive Webapp generator
+
+> Progressive Web Application yeoman generator
 
 ## Installation
 
 ```bash
-npm install -g yo
-npm install -g generator-pwa
+npm install -g yo && generator-pwa
 ```
 
 Then generate your new project:
@@ -14,7 +14,7 @@ Then generate your new project:
 yo pwa
 ```
 
-This would generate a dir structure like:
+This would generate a directory structure like:
 
 ```sh
 app/
@@ -30,7 +30,6 @@ app/
 |____index.html
 |____js
 | |____app.js
-| |____push.js
 |____server.js
 |____sw.js
 ```
@@ -49,13 +48,13 @@ app/
 
 ##TODO
 
+- [x] - Add background sync.
+
 - [ ] - Prompt for all `manifest.json` related fields.
 
 - [ ] - AskFor static-cache-path (automatically pick the required files)?
 
 - [ ] - Use `async-await` in `sw.js`.
-
-- [ ] - Add background sync.
 
 - [ ] - Add a gif!
 
@@ -63,7 +62,6 @@ app/
 ## License
 
 MIT © [Hemanth.HM](https://h3manth.com)
-
 
 [npm-image]: https://badge.fury.io/js/generator-pwa.svg
 [npm-url]: https://npmjs.org/package/generator-pwa
