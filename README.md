@@ -30,8 +30,9 @@ app/
 |____index.html
 |____js
 | |____app.js
+|____manifest.json
+|____serviceWorker.js
 |____server.js
-|____sw.js
 ```
 
 ## Run
