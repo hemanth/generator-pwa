@@ -17,7 +17,7 @@
 	//To check `push notification` is supported
   function canPush() {
     //To check `notification` permission is denied by user
-    if (Notification && Notification.permission === 'denied') {
+    if (window.Notification && window.Notification.permission === 'denied') {
       console.warn('User has blocked notifications.');
       return;
     }
@@ -38,6 +38,9 @@
           if (!subscription) {
             subscribePush()
           }
+					else {
+						sendPushNotification();
+					}
         })
         .catch((error) => {
           console.error('Error occurred while enabling push ', error);
@@ -68,20 +71,13 @@
       .then((registration) => {
         registration.pushManager.getSubscription()
         .then((subscription) => {
-          //Send `push notification` - source for below url `server.js`
-          fetch('/send_notification', {
-            method: 'post',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(subscription)
+					//Send `push notification`
+					var url = '/sendNotification?endpoint=' + subscription.endpoint;
+          fetch(url, {
+            method: 'post'
           })
           .then((response) => {
             return response.json();
-          })
-          .then((data) => {
-            console.error('Error occurred while sending push notification ', data);
           })
         })
       })

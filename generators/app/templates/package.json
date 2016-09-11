@@ -6,7 +6,7 @@
   "dependencies": {
     "express": "^4.14.0" <%if(isPush){%>,
     "body-parser": "^1.15.2"<%}if(isPush){%>,
-    "node-gcm": "^0.14.4"<%}%>
+    "web-push": "^2.2.0"<%}%>
   },
   "engines": {
     "node": "4.1.1"

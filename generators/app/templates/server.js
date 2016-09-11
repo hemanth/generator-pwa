@@ -25,7 +25,8 @@ app.get('/', function (req, res) {
 <%if(isPush){%>
 //To receive push request from client
 const webPush = require('web-push');
-webPush.setGCMAPIKey(require('./manifest.json').gcm_sender_id);
+webPush.setGCMAPIKey("<%= apiKey %>");
+
 app.post('/sendNotification', function(req, res) {
   setTimeout(function() {
     webPush.sendNotification(req.query.endpoint || '/sendNotification', {
@@ -42,5 +43,3 @@ app.post('/sendNotification', function(req, res) {
 app.listen(process.env.PORT || 3000, function() {
   console.log('Local Server : http://localhost:3000');
 });
-
-
