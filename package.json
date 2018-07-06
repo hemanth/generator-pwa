@@ -20,9 +20,10 @@
   ],
   "dependencies": {
     "chalk": "^1.1.3",
-    "yeoman-generator": "^0.22.5",
+    "yeoman-generator": "^0.23.0",
     "yeoman-test": "^1.1.0",
-    "yosay": "^1.1.0"
+    "yosay": "^1.1.0",
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "ava": "^0.14.0",
@@ -46,10 +47,13 @@
   "repository": "hemanth/generator-pwa",
   "scripts": {
     "prepublish": "gulp prepublish",
-    "test": "ava"
+    "test": "ava",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "license": "MIT",
   "engines": {
     "node": ">=4"
-  }
+  },
+  "snyk": true
 }
