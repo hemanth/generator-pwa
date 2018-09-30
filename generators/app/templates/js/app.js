@@ -33,7 +33,7 @@ if ('serviceWorker' in navigator) {
     registration.addEventListener('updatefound', updateFound);
 
 		<% if (isPush) { %>
-		isPushNotification(reg); // Check push is supported and enabled already
+		isPushNotification(registration); // Check push is supported and enabled already
 		<% } %>
 	}).catch((error) => {
 		console.log('Registration failed with ' + error); // Registration failed
