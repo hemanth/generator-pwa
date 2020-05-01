@@ -1,0 +1,108 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - yeoman-test > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > gruntfile-editor > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > gruntfile-editor > ast-query > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > async > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > yeoman-generator > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > yeoman-generator > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > yeoman-generator > async > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > async > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > yeoman-generator > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > sinon > nise > @sinonjs/formatio > @sinonjs/samsam > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > yeoman-generator > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-environment > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > async > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > yeoman-generator > async > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > sinon > nise > @sinonjs/formatio > @sinonjs/samsam > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-environment > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > async > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
+    - yeoman-generator > yeoman-test > yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T03:57:38.875Z'
