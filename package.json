@@ -20,8 +20,8 @@
   ],
   "dependencies": {
     "chalk": "^1.1.3",
-    "yeoman-generator": "^0.22.5",
-    "yeoman-test": "^1.1.0",
+    "yeoman-generator": "^1.0.0",
+    "yeoman-test": "^5.0.0",
     "yosay": "^1.1.0"
   },
   "devDependencies": {
